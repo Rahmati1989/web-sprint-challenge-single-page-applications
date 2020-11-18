@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import * as yup from 'yup';
 import axios from 'axios';
 
-//Schema
 const formSchema = yup.object().shape({
   name: yup.string().required("You must enter a name"),
   size: yup.string().required("Pick you your size"),
@@ -16,10 +15,10 @@ const formSchema = yup.object().shape({
 
 
 function Form() {
-  // post state
+
   const [post, setPost] = useState([]);
 
-  // form start
+  
   const [formState, setFormState] = useState({
     name: "",
     size: "",
@@ -30,8 +29,7 @@ function Form() {
     pineapple: "",
     special: "",
   });
-  
-  // error state
+
   const [errors, setErrors] = useState({
     name: "",
     size: "",
@@ -43,7 +41,7 @@ function Form() {
     special: ""
     });
 
-  // validation
+ 
   const validate = (e) => {
     let val = e.target.type === "checkbox" ? e.target.checked : e.target.value;
     yup
@@ -57,7 +55,7 @@ function Form() {
       })
   }
 
-  //onChange handler
+
   const handleChanges = (e) => {
     e.persist();
     validate(e);
@@ -65,7 +63,7 @@ function Form() {
     setFormState({...formState, [e.target.name]: value});
   };
 
-  //formSubmit handler
+  
   const formSubmit = (e) => {
     e.preventDefault();
     axios.post("https://reqres.in/api/users", formState)
@@ -133,7 +131,7 @@ function Form() {
           Pineapple
         </label>
 
-        {/* Instructions */}
+      
         <label htmlFor="special">
           Any Instructions?<br></br>
           <textarea type="text" id="special" name="special" placeholder="Add your special Instructions" onChange={handleChanges}/>
